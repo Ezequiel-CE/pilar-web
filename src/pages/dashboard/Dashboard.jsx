@@ -1,18 +1,22 @@
-import React, { useEffect } from 'react';
-import { Grid, Paper, Box } from '@mui/material';
+import React from 'react';
+import { Grid } from '@mui/material';
+import Card from '../../components/dashboard/Card';
+import todoImg from '../../assets/image/todo.jpg';
+import fetchImg from '../../assets/image/fetch.jpg';
 
 const Dashboard = () => {
   return (
     <Grid container spacing={3}>
       <Grid item xs={12}>
-        <Paper sx={{ p: 2 }}>
-          <Box>Dashboard</Box>
-        </Paper>
+        <Card image={todoImg} title={'Todo section'} text={'go to the todo page'} href={'/todo'} />
       </Grid>
       <Grid item xs={12}>
-        <Paper sx={{ p: 2 }}>
-          <Box>Dashboard</Box>
-        </Paper>
+        <Card
+          image={fetchImg}
+          title={'Fetch List section'}
+          text={'go to the fetch list page'}
+          href={'/fetch-list'}
+        />
       </Grid>
     </Grid>
   );

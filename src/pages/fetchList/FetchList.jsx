@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Grid, Paper, Box } from '@mui/material';
 
 const FetchList = () => {

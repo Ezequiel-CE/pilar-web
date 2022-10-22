@@ -1,7 +1,7 @@
 import { Navigate, useRoutes } from 'react-router-dom';
 import Dashboard from './dashboard/Dashboard';
 import FetchList from './fetchList/FetchList';
-import DashboardLayout from './layout/DashboardLayoutt';
+import DashboardLayout from './layout/DashboardLayout';
 import NotFound from './layout/NotFount';
 import Todo from './todo/Todo';
 
