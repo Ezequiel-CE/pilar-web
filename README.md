@@ -1,4 +1,4 @@
-# Repo para el modulo de react de Pilar Tecno
+# Modulo de react de Pilar Tecno
 
 ##TP 1
 
