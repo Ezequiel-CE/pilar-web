@@ -1,14 +1,23 @@
-import React from 'react';
-import { Grid, Paper, Box } from '@mui/material';
+import React, { useEffect } from 'react';
+import { Grid } from '@mui/material';
+import { useSelector, useDispatch } from 'react-redux';
+import { appSelector } from '../../redux/appRedux';
+import TodoList from '../../components/todo/TodoList';
+import TodoForm from '../../components/todo/TodoForm';
+import { changePageName } from '../../redux/appRedux';
 
 const Todo = () => {
+  const todos = useSelector(appSelector.todo);
+  const dispatcher = useDispatch();
+
+  useEffect(() => {
+    dispatcher(changePageName('Todo'));
+  }, [dispatcher]);
+
   return (
     <Grid container spacing={3}>
-      <Grid item xs={12}>
-        <Paper sx={{ p: 2 }}>
-          <Box>Todo</Box>
-        </Paper>
-      </Grid>
+      <TodoForm />
+      {todos.length > 0 && <TodoList todos={todos} />}
     </Grid>
   );
 };

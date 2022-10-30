@@ -3,3 +3,7 @@
 ##TP 1
 
 ![1](src/assets/image/tp1.png)
+
+##TP 2
+
+![2](src/assets/image/tp2.png)
