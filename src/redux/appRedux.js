@@ -1,13 +1,16 @@
 const ADD_TODO = 'ADD_TODO';
 const COMPLETE_TODO = 'COMPLETE_TODO';
 const DELETE_TODO = 'DELETE_TODO';
+const CHANGE_NAME = 'CHANGE_NAME';
 
 const initialState = {
   todo: [],
+  pageName: '',
 };
 
 export const appSelector = {
   todo: (state) => state.todo,
+  pageName: (state) => state.pageName,
 };
 
 export const appReducer = (state = initialState, action) => {
@@ -53,6 +56,15 @@ export const appReducer = (state = initialState, action) => {
     };
   }
 
+  //change name
+
+  if (action.type === CHANGE_NAME) {
+    return {
+      ...state,
+      pageName: action.name,
+    };
+  }
+
   return state;
 };
 
@@ -71,4 +83,9 @@ export const completedTodo = (payload) => ({
 export const deleteTodo = (id) => ({
   type: DELETE_TODO,
   id,
+});
+
+export const changePageName = (name) => ({
+  type: CHANGE_NAME,
+  name,
 });
