@@ -1,23 +1,44 @@
 import React, { useEffect, useState } from 'react';
-import { Grid, Typography, Card, CardContent, CardMedia } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { changePageName } from '../../redux/appRedux';
 import api from '../../services/api';
 import { appSelector } from '../../redux/appRedux';
 import Item from './Item';
-import POKE_IMG from '../../assets/image/poke_next.png';
+import Modal from './Modal';
+import NextItem from './NextItem';
 
 const FetchList = () => {
   const dispatcher = useDispatch();
   const [pokemons, setPokemons] = useState(null);
   const [next, setNext] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [data, setData] = useState('');
+
+  const handleClickOpen = async (url) => {
+    try {
+      // dispatchher(appActions.setLoading(true));
+      const result = await api.GET(url);
+      if (result) {
+        setData(result);
+        setOpen(true);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      // dispatch(appActions.setLoading(false));
+    }
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const getPokemons = async () => {
     try {
       // dispatcher(appActions.loading(true));
       const result = await api.GET(api.pokemons);
       if (result) {
-        console.log('poke: ', result);
         setPokemons(result.results);
         setNext(result.next);
       }
@@ -50,46 +71,25 @@ const FetchList = () => {
   }, [dispatcher]);
 
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={12}>
-        <Typography component="div" variant="h5">
-          Mi Pokedex
-        </Typography>
+    <>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <Typography component="div" variant="h5">
+            Mi Pokedex
+          </Typography>
+        </Grid>
+        {pokemons &&
+          pokemons.map((p, index) => {
+            return (
+              <Grid item xs={4} key={index}>
+                <Item data={p} openModal={handleClickOpen} />
+              </Grid>
+            );
+          })}
+        <NextItem loadMore={loadMore} />
       </Grid>
-      {pokemons &&
-        pokemons.map((p, index) => {
-          return (
-            <Grid item xs={4} key={index}>
-              <Item data={p} />
-            </Grid>
-          );
-        })}
-      <Grid item xs={4}>
-        <Card
-          p={2}
-          sx={{
-            display: 'flex',
-            height: 100,
-            cursor: 'pointer',
-            backgroundColor: '#317b52',
-            '&:hover': { backgroundColor: '#5acdbd' },
-          }}
-          onClick={loadMore}
-        >
-          <CardContent sx={{ flex: '1 0 auto' }}>
-            <Typography component="div" variant="h5" sx={{ color: 'white' }}>
-              Cargar Más
-            </Typography>
-          </CardContent>
-          <CardMedia
-            component="img"
-            sx={{ width: 100, p: 2 }}
-            image={POKE_IMG}
-            alt="Live from space album cover"
-          />
-        </Card>
-      </Grid>
-    </Grid>
+      <Modal data={data} handleClose={handleClose} open={open} />
+    </>
   );
 };
 export default FetchList;

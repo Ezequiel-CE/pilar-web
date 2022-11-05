@@ -12,7 +12,7 @@ const getPokemonImgId = (id) => {
   }
 };
 
-const Item = ({ data }) => {
+const Item = ({ data, openModal }) => {
   const path = data.url.split('/');
   const imgID = getPokemonImgId(path[6]);
   return (
@@ -24,6 +24,7 @@ const Item = ({ data }) => {
         cursor: 'pointer',
         '&:hover': { backgroundColor: '#5acdbd', color: 'white' },
       }}
+      onClick={() => openModal(data.url)}
     >
       <CardContent sx={{ flex: '1 0 auto' }}>
         <Typography component="div" variant="h5">
