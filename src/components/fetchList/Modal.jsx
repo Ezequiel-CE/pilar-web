@@ -12,6 +12,7 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Box } from '@mui/system';
+import { capitalizeFirstLetter, fomartHability } from '../../lib/textFormater';
 
 function BootstrapDialogTitle(props) {
   const { children, onClose, ...other } = props;
@@ -41,7 +42,9 @@ const Modal = ({ data, handleClose, open }) => {
   return (
     <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
       <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-        <p>{data ? data.name : '_'}</p>
+        <p style={{ textAlign: 'center' }}>
+          {data ? capitalizeFirstLetter(data.name) : '_'}
+        </p>
         <Box sx={{ display: 'inline-flex' }}>
           <Avatar
             sx={{ width: 150, height: 150 }}
@@ -64,13 +67,13 @@ const Modal = ({ data, handleClose, open }) => {
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
-            <Typography>Habilidades</Typography>
+            <Typography sx={{ fontSize: 18, fontWeight: 800 }}>Habilidades</Typography>
           </AccordionSummary>
           <AccordionDetails>
             {data &&
               data.abilities &&
               data.abilities.map((h, index) => (
-                <Typography key={index}>{h.ability.name}</Typography>
+                <Typography key={index}>{fomartHability(h.ability.name)}</Typography>
               ))}
           </AccordionDetails>
         </Accordion>
@@ -81,13 +84,13 @@ const Modal = ({ data, handleClose, open }) => {
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
-            <Typography>Moviemientos</Typography>
+            <Typography sx={{ fontSize: 18, fontWeight: 800 }}>Moviemientos</Typography>
           </AccordionSummary>
           <AccordionDetails>
             {data &&
               data.moves &&
               data.moves.map((m, index) => (
-                <Typography key={index}>{m.move.name}</Typography>
+                <Typography key={index}>{fomartHability(m.move.name)}</Typography>
               ))}
           </AccordionDetails>
         </Accordion>

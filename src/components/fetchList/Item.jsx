@@ -1,4 +1,5 @@
 import { Typography, Card, CardContent, CardMedia } from '@mui/material';
+import { capitalizeFirstLetter } from '../../lib/textFormater';
 import { IMG_URL } from '../../services/api';
 
 const getPokemonImgId = (id) => {
@@ -31,7 +32,7 @@ const Item = ({ data, openModal }) => {
           N° {imgID}
         </Typography>
         <Typography component="div" variant="h5">
-          {data.name}
+          {capitalizeFirstLetter(data.name)}
         </Typography>
       </CardContent>
       <CardMedia
